@@ -1,0 +1,269 @@
+.approach {
+  padding: 4rem 2.5rem;
+  margin: 6rem auto;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 40px;
+  max-width: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.approach__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+
+.approach__header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+
+.approach__header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.75rem;
+  color: #1B3A4B;
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
+}
+
+.approach__header h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  color: #1B3A4B;
+  margin-bottom: 1.8rem;
+  line-height: 1.4;
+}
+
+.approach__header p {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #4A5568;
+}
+
+.approach__content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: start;
+  margin: 4rem 0;
+}
+
+.approach__values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.value-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(44, 82, 130, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: transparent;
+}
+
+.value-card:hover::before {
+  opacity: 1;
+}
+
+.value-card__icon {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  color: #1B3A4B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.value-card h4 {
+  font-size: clamp(1.2rem, 2.2vw, 1.4rem);
+  color: #2C5282;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.value-card p {
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  color: #4A5568;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.approach__image {
+  position: sticky;
+  top: 2rem;
+  height: 550px;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(44, 82, 130, 0.08);
+}
+
+.approach__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.approach__button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  border: none;
+  border-radius: 20px;
+  color: #1B3A4B;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.approach__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Tablet Breakpoint */
+@media (max-width: 1024px) {
+  .approach {
+    margin: 2rem 1rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .approach__content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin: 3rem 0;
+  }
+
+  .approach__values {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .approach__image {
+    order: 1;
+    position: relative;
+    top: 0;
+    height: 400px;
+    margin-bottom: 2rem;
+  }
+
+  .value-card {
+    padding: 1.8rem;
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .approach {
+    padding: 2rem 1rem;
+    border-radius: 30px;
+  }
+
+  .approach__header h2 {
+    font-size: 2rem;
+  }
+
+  .approach__header h3 {
+    font-size: 1.5rem;
+  }
+
+  .approach__values {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .approach__image {
+    height: 300px;
+  }
+
+  .value-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .value-card h4 {
+    font-size: 1.5rem;
+  }
+
+  .value-card p {
+    font-size: 1rem;
+  }
+
+  .approach__button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Kleine Mobile Geräte */
+@media (max-width: 480px) {
+  .approach__header h2 {
+    font-size: 1.75rem;
+  }
+
+  .approach__header h3 {
+    font-size: 1.25rem;
+  }
+
+  .approach__header p {
+    font-size: 1rem;
+  }
+
+  .approach__image {
+    height: 250px;
+  }
+
+  .value-card {
+    padding: 1.25rem;
+  }
+
+  .value-card__icon {
+    font-size: 1.8rem;
+  }
+
+  .value-card h4 {
+    font-size: 1.1rem;
+  }
+
+  .value-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .approach__cta {
+    margin-top: 3rem;
+  }
+
+  .approach__button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    min-width: 260px;
+    background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  }
+} 

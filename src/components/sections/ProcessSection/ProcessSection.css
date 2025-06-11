@@ -1,0 +1,258 @@
+.process {
+  padding: 4rem 2rem;
+  background: #ffffff;
+  border-radius: 40px;
+  margin: 2rem auto;
+  max-width: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.process__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.process__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.process__header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  color: #1B3A4B;
+  margin-bottom: 1rem;
+}
+
+.process__header p {
+  font-size: 1.2rem;
+  color: #6c757d;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  position: relative;
+  margin-bottom: 4rem;
+}
+
+.process__step {
+  text-align: center;
+  position: relative;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.process__step-number {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  color: #1B3A4B;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+.process__step-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1B3A4B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process__step-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: #1B3A4B;
+  margin-bottom: 0.5rem;
+}
+
+.process__step-description {
+  color: #6c757d;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.process__step-arrow {
+  position: absolute;
+  right: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #A3E635;
+  font-size: 1.5rem;
+  z-index: 1;
+}
+
+.process__cta {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.process__cta p {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.process__button {
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  color: #1B3A4B;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.process__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(199, 231, 12, 0.3);
+}
+
+@media (max-width: 1200px) {
+  .process__container {
+    max-width: 960px;
+    padding: 0 1.5rem;
+  }
+
+  .process__steps {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .process__container {
+    max-width: 720px;
+  }
+
+  .process__steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .process__title {
+    font-size: 2.5rem;
+  }
+
+  .process__subtitle {
+    font-size: 1.1rem;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .process {
+    padding: 4rem 0;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    margin-top: 2.5rem;
+  }
+
+  .process__container {
+    padding: 0 1rem;
+  }
+
+  .process__header {
+    margin-bottom: 2.5rem;
+  }
+
+  .process__title {
+    font-size: 2.25rem;
+  }
+
+  .process__steps {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .process__header h2 {
+    font-size: 2rem;
+  }
+
+  .process__header p {
+    font-size: 1rem;
+  }
+
+  .process__step-title {
+    font-size: 1.5rem;
+  }
+
+  .process__step-description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .process {
+    padding: 3rem 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-top: 2rem;
+  }
+
+  .process__steps {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .process__title {
+    font-size: 2rem;
+  }
+
+  .process__subtitle {
+    font-size: 1rem;
+  }
+
+  .process__step-title {
+    font-size: 1.25rem;
+  }
+}
+
+.process__step-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.process__step-bullets li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.process__step-bullets li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #A3E635;
+  font-weight: bold;
+}
+
+.process__step-note {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+  margin-top: 0.5rem;
+} 

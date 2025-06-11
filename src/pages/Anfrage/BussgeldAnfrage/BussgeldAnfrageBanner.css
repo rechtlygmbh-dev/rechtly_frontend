@@ -1,0 +1,28 @@
+.bussgeld-banner-arrow-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 24px;
+  z-index: 3;
+}
+
+.bussgeld-banner-arrow {
+  font-size: 3rem;
+  color: #fff;
+  animation: bounceDown 1.5s infinite;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
+@keyframes bounceDown {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(18px);
+  }
+  60% {
+    transform: translateY(10px);
+  }
+} 

@@ -1,0 +1,225 @@
+.kfz-hero {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  min-height: 80vh;
+  margin: 10;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 0px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.kfz-hero__container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(80vh - 70px);
+  box-sizing: border-box;
+}
+
+.kfz-hero__content {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  gap: 2rem;
+}
+
+.kfz-hero__text {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.kfz-hero__title-line {
+  font-size: 4.5rem;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.kfz-hero__highlight-animated {
+  color: #A3E635;
+  position: relative;
+  display: inline-block;
+}
+
+.kfz-hero__highlight-animated::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: #A3E635;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.5s ease;
+  animation: underlineAnimation 2s infinite;
+}
+
+@keyframes underlineAnimation {
+  0% {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+  }
+}
+
+.kfz-hero__subtitle {
+  font-size: 2.5rem;
+  color: #A3E635;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.kfz-hero__cta-button {
+  background: #A3E635;
+  color: #1B3A4B;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.kfz-hero__cta-button:hover {
+  background: #C7E70C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(163, 230, 53, 0.3);
+}
+
+.kfz-hero__description {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.hero-section {
+  width: 100%;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #1B3A4B 0%, #2C5364 100%);
+  margin: 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(27, 58, 75, 0.1);
+}
+
+.hero-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4rem;
+  text-align: left;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 500px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.hero-text .highlight {
+  color: var(--accent-color);
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero-text .highlight::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-color);
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  text-align: left;
+  width: 100%;
+}
+
+.hero-cta {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(163, 230, 53, 0.3);
+  align-self: flex-start;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(163, 230, 53, 0.4);
+}
+
+.hero-image {
+  flex: 1;
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+} 

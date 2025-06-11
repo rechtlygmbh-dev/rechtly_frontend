@@ -1,0 +1,257 @@
+.banner {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: -70px; /* Navigation ausgleichen */
+  padding-top: 70px; /* Inhalt unter der Navigation beginnen */
+  padding-bottom: 70px; /* Beispielwert, anpassen je nach Bedarf */
+  overflow: hidden; /* Hinzugefügt, um Überlappungen zu vermeiden */
+}
+
+.banner__container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 70px);
+  box-sizing: border-box;
+}
+
+.banner__content {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  gap: 2rem;
+}
+
+.banner__text {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.banner__text::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  width: 200%;
+  height: 200vh; /* Ursprüngliche Höhe wiederherstellen */
+  background: #1B3A4B;
+  border-radius: 0 100% 100% 0;
+  transform: translateY(-50%); /* Ursprüngliche Transformation wiederherstellen */
+  z-index: -1;
+}
+
+.banner__text h1 {
+  font-size: 3.5rem;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.banner__subtitle {
+  font-size: 2rem;
+  color: #A3E635;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.banner__title-line {
+  display: block;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.banner__title-line:last-child {
+  margin-bottom: 0;
+}
+
+.banner__text .highlight {
+  color: #A3E635;
+  position: relative;
+  display: inline-block;
+}
+
+.banner__benefits {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.banner__benefit-item {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  flex: 1;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.banner__benefit-item:hover {
+  border-color: #A3E635;
+}
+
+.banner__benefit-icon {
+  font-size: 2rem;
+  color: #A3E635;
+  margin-bottom: 0.5rem;
+}
+
+.banner__benefit-item h3 {
+  font-size: 1.2rem;
+  color: #1B3A4B;
+  margin-bottom: 0.5rem;
+}
+
+.banner__benefit-item p {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.banner__cta-button {
+  background: #A3E635;
+  color: #1B3A4B;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.banner__cta-button:hover {
+  background: #C7E70C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(163, 230, 53, 0.3);
+}
+
+.banner__image-wrapper {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 45%;
+}
+
+.banner__image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1200px) {
+  .banner__text h1 {
+    font-size: 3rem;
+  }
+  
+  .banner__content {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .banner__text h1 {
+    font-size: 2.5rem;
+  }
+
+  .banner__subtitle {
+    font-size: 1.8rem;
+  }
+
+  .banner__benefits li {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    margin-top: 60px; /* Angepasste Höhe für mobile Navigation */
+    height: auto;
+    min-height: calc(100vh - 60px);
+  }
+
+  .banner__container {
+    padding-top: 0;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+  }
+
+  .banner__content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .banner__text {
+    padding: 2rem 1rem;
+    max-width: 100%;
+  }
+
+  .banner__text h1 {
+    font-size: 2.5rem;
+  }
+
+  .banner__subtitle {
+    font-size: 1.5rem;
+  }
+
+  .banner__benefits {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .banner__text::before {
+    left: -50%;
+    width: 200%;
+    border-radius: 0 0 50% 50%;
+    transform: translateY(-30%);
+  }
+
+  .banner__benefit-item {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .banner__image-wrapper {
+    max-width: 80%;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner__text h1 {
+    font-size: 2rem;
+  }
+
+  .banner__subtitle {
+    font-size: 1.5rem;
+  }
+
+  .banner__benefits li {
+    font-size: 1rem;
+  }
+
+  .banner__cta-button {
+    width: 100%;
+    padding: 1rem;
+  }
+} 

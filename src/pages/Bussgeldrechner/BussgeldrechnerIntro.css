@@ -1,0 +1,105 @@
+.bussgeldrechner-progress-bar-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bussgeldrechner-progress-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5fbe8;
+  border-radius: 8px;
+  padding: 0.5rem 0.5rem;
+  margin-top: 1rem;
+}
+
+.bussgeldrechner-progress-step {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  color: #A0AEC0;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.bussgeldrechner-progress-step.active {
+  background: linear-gradient(90deg, #C7E70C 0%, #A3E635 100%);
+  color: #1B3A4B;
+  font-weight: 700;
+}
+
+/* Restliche Styles bleiben erhalten */
+.bussgeldrechner-info {
+  margin-top: 2rem;
+}
+
+.info-cards {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.info-checkbox {
+  background: #f5fbe8;
+  color: #1B3A4B;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(163, 230, 53, 0.08);
+}
+
+.info-hinweis {
+  font-size: 0.98rem;
+  color: #4A5568;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 0 auto;
+  max-width: 700px;
+  text-align: left;
+  box-shadow: 0 1px 4px rgba(27, 58, 75, 0.04);
+}
+
+@media (max-width: 600px) {
+  .info-cards {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  .info-hinweis {
+    font-size: 0.93rem;
+    padding: 0.8rem 0.7rem;
+  }
+}
+
+.bussgeldrechner-intro {
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 2rem 1.5rem 2.5rem 1.5rem;
+  margin-bottom: 0;
+  box-shadow: 0 2px 12px rgba(27, 58, 75, 0.06);
+  text-align: center;
+}
+
+.bussgeldrechner-intro-title {
+  font-size: 2rem;
+  color: #1B3A4B;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.category-selection-section {
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 2rem;
+} 

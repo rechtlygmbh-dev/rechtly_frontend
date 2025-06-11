@@ -1,0 +1,362 @@
+.expertise-section {
+  background: #ffffff;
+  padding: 4rem 2.5rem;
+  margin: 2rem auto;
+  border-radius: 30px;
+  max-width: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.expertise__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.expertise__header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+
+.expertise__header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.75rem;
+  color: #1B3A4B;
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
+}
+
+.expertise__intro {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #4A5568;
+}
+
+.expertise__advantages {
+  margin: 4rem 0 6rem;
+  padding: 0;
+  max-width: 1200px;
+  margin: 4rem auto;
+  color:#1B3A4B
+}
+
+.expertise-section .advantage-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  height: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 2px solid var(--accent-color);
+  margin: 10px 0 20px 0;
+}
+
+.expertise-section .advantage-card__icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: var(--primary-color) !important;
+}
+
+.expertise-section .advantage-card h3 {
+  color: #1a1a1a !important;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.expertise-section .advantage-card p {
+  color: #4a4a4a !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.vorteile-slider {
+  padding: 20px 0;
+}
+
+/* Hover-Effekt für die Karten */
+.expertise-section .advantage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-color);
+  z-index: 1;
+}
+
+.expertise__process {
+  margin: 6rem 0;
+}
+
+.expertise__process h3 {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  font-size: 2rem;
+  color: #1B3A4B;
+  margin-bottom: 3rem;
+}
+
+.process-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.process-step__number {
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  color: #1B3A4B;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.process-step__content h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  color: #1B3A4B;
+  margin-bottom: 0.5rem;
+}
+
+.process-step__content p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #1B3A4B;
+  line-height: 1.6;
+}
+
+.expertise__cta {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.expertise__cta h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #1B3A4B;
+  margin-bottom: 2rem;
+}
+
+.expertise__button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.expertise__button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  border: none;
+  border-radius: 20px;
+  color: #1B3A4B;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.expertise__button--secondary {
+  background: transparent;
+  border: 2px solid #A3E635;
+  box-shadow: none;
+}
+
+.expertise__button--secondary:hover {
+  background: linear-gradient(135deg, #C7E70C 0%, #A3E635 100%);
+  border-color: transparent;
+}
+
+.expertise__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1024px) {
+  .expertise {
+    margin: 2rem 1rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .expertise__header h2 {
+    font-size: 2.2rem;
+  }
+
+  .advantage-card {
+    height: 260px;
+  }
+
+  .slick-prev {
+    left: -30px;
+  }
+
+  .slick-next {
+    right: -30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .expertise {
+    padding: 2rem 1rem;
+  }
+
+  .expertise__header h2 {
+    font-size: 2rem;
+  }
+
+  .expertise__intro {
+    font-size: 1.1rem;
+  }
+
+  .process-step {
+    gap: 1.5rem;
+  }
+
+  .slick-prev, .slick-next {
+    display: none !important;
+  }
+
+  .advantage-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .advantage-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .advantage-card p {
+    font-size: 1rem;
+  }
+
+  .expertise__button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .expertise__button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .expertise__header h2 {
+    font-size: 1.6rem;
+  }
+
+  .advantage-card {
+    height: 220px;
+    padding: 1.5rem;
+  }
+
+  .advantage-card__icon {
+    font-size: 2rem;
+  }
+
+  .advantage-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .advantage-card p {
+    font-size: 1rem;
+  }
+
+  .expertise__button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .expertise__button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.vorteile-slider {
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: var(--accent-color);
+}
+
+.swiper-pagination-bullet {
+  background: var(--primary-color);
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent-color);
+  opacity: 1;
+}
+
+.swiper-slide {
+  height: 350px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.vorteil-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(27, 58, 75, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vorteil-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+.vorteil-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 50%;
+} 
