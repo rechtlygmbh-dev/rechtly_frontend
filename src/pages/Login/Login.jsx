@@ -3,6 +3,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
+// Get the API URL from environment variables
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://rechtly-backend.onrender.com'
+  : process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +38,7 @@ const Login = () => {
     setSuccess('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password
       });
@@ -95,7 +100,7 @@ const Login = () => {
         });
       }
 
-      await axios.post('http://localhost:5000/api/auth/register', userData);
+      await axios.post(`${API_URL}/api/auth/register`, userData);
       setSuccess('Registrierung erfolgreich. Bitte aktivieren Sie Ihr Konto über den Link in der E-Mail.');
       setIsRegistering(false);
     } catch (error) {
@@ -109,7 +114,7 @@ const Login = () => {
     setSuccess('');
 
     try {
-      await axios.post('http://localhost:5000/api/auth/forgot-password', {
+      await axios.post(`${API_URL}/api/auth/forgot-password`, {
         email
       });
       setSuccess('Eine E-Mail mit Anweisungen zum Zurücksetzen des Passworts wurde gesendet.');

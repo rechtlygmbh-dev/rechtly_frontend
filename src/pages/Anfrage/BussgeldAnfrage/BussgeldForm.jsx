@@ -3,6 +3,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import BussgeldAnfrageBanner from './BussgeldAnfrageBanner';
 import './BussgeldForm.css';
 
+// Get the API URL from environment variables
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://rechtly-backend.onrender.com'
+  : process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const BussgeldForm = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
@@ -207,7 +212,7 @@ const BussgeldForm = () => {
         uploadFormData.append('files', file);
       });
 
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch(`${API_URL}/api/upload`, {
         method: 'POST',
         body: uploadFormData
       });
@@ -257,7 +262,7 @@ const BussgeldForm = () => {
       const fileToRemove = formData.allgemein.dokumente[index];
       
       if (fileToRemove.id) {
-        const response = await fetch(`http://localhost:5000/api/upload/${fileToRemove.id}`, {
+        const response = await fetch(`${API_URL}/api/upload/${fileToRemove.id}`, {
           method: 'DELETE'
         });
         
@@ -372,7 +377,7 @@ const BussgeldForm = () => {
 
       console.log('Sende Daten:', backendData); // Debug-Log
 
-      const response = await fetch('http://localhost:5000/api/anfrage', {
+      const response = await fetch(`${API_URL}/api/anfrage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -393,7 +398,7 @@ const BussgeldForm = () => {
       }
 
       // Sende E-Mails
-      const emailResponse = await fetch('http://localhost:5000/api/anfrage/email', {
+      const emailResponse = await fetch(`${API_URL}/api/anfrage/email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

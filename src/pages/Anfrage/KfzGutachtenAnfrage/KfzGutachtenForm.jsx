@@ -1,3 +1,8 @@
+// Get the API URL from environment variables
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://rechtly-backend.onrender.com'
+  : process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const handleAbsenden = async (e) => {
   e.preventDefault();
   
@@ -43,7 +48,7 @@ const handleAbsenden = async (e) => {
 
     console.log('Sende Daten:', backendData); // Debug-Log
 
-    const response = await fetch('http://localhost:5000/api/anfrage', {
+    const response = await fetch(`${API_URL}/api/anfrage`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
