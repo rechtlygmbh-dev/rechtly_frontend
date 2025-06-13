@@ -4,7 +4,7 @@ import VerkehrsunfallAnfrageBanner from './VerkehrsunfallAnfrageBanner';
 import './VerkehrsunfallAnfrage.css';
 
 // API URL basierend auf der Umgebung - für Produktionsumgebung relativer Pfad
-const BASE_URL = '/api/upload';  // Immer relativer Pfad, wird vom Webserver weitergeleitet
+const BASE_URL = 'https://rechtly-backend.onrender.com/api/upload';  // Immer relativer Pfad, wird vom Webserver weitergeleitet
 
 const VerkehrsunfallAnfrage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -259,7 +259,7 @@ const VerkehrsunfallAnfrage = () => {
     
     try {
       if (fileToRemove.id) {
-        const response = await fetch(`/api/upload/${fileToRemove.id}`, {
+        const response = await fetch(`https://rechtly-backend.onrender.com/api/upload/${fileToRemove.id}`, {
           method: 'DELETE',
           credentials: 'same-origin'
         });

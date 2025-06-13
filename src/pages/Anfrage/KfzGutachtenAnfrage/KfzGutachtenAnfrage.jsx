@@ -54,7 +54,7 @@ const KfzGutachtenAnfrage = () => {
       files.forEach(file => {
         formDataUpload.append('files', file);
       });
-      const response = await fetch('/api/upload', {
+      const response = await fetch('https://rechtly-backend.onrender.com/api/upload', {
         method: 'POST',
         body: formDataUpload
       });
@@ -122,7 +122,7 @@ const KfzGutachtenAnfrage = () => {
       const fileToRemove = formData[step]?.dokumente[indexToRemove];
       
       if (fileToRemove?.id) {
-        const response = await fetch(`/api/upload/${fileToRemove.id}`, {
+        const response = await fetch(`https://rechtly-backend.onrender.com/api/upload/${fileToRemove.id}`, {
           method: 'DELETE'
         });
         
