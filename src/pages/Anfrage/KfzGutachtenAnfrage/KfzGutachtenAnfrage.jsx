@@ -54,35 +54,18 @@ const KfzGutachtenAnfrage = () => {
       files.forEach(file => {
         formDataUpload.append('files', file);
       });
-      
       const response = await fetch('/api/upload', {
         method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          // Don't set Content-Type header when sending FormData
-        },
         body: formDataUpload
       });
-
       if (!response.ok) {
-        // Try to parse error response if available
-        let errorMessage = 'Upload fehlgeschlagen';
-        try {
-          const errorData = await response.json();
-          errorMessage = errorData.details || errorData.error || errorMessage;
-        } catch (e) {
-          // If JSON parsing fails, use status text
-          errorMessage = `${response.status}: ${response.statusText || errorMessage}`;
-        }
-        throw new Error(errorMessage);
+        const errorData = await response.json();
+        throw new Error(errorData.details || 'Upload fehlgeschlagen');
       }
-
       const data = await response.json();
       if (!data.success) {
         throw new Error(data.details || 'Upload fehlgeschlagen');
       }
-
       setFormData(prev => ({
         ...prev,
         bilder: {
@@ -99,10 +82,6 @@ const KfzGutachtenAnfrage = () => {
       }));
     } catch (error) {
       console.error('Upload-Fehler:', error);
-      setErrors(prev => ({
-        ...prev,
-        bilder: error.message
-      }));
       throw error;
     }
   };
