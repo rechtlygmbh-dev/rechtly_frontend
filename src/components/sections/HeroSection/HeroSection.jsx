@@ -66,81 +66,83 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="hero" style={heroStyle}>
-      <div className="hero__container">
-        <div className={contentClass}>
-          <div className={textClass}>
-            <h1>
-              <span className="hero__title-line">Ihr Experte für <span className="hero__highlight-animated">Verkehrsrecht</span></span>
-            </h1>
-            <p className="hero__subtitle">Einfach. Digital. Recht bekommen.</p>
-            
-            {/* Normale Benefit-Items für Desktop/Tablet */}
-            {!isMobile && (
-              <div className="hero__benefits">
-                {benefitItems.map((item, index) => (
-                  <div className="hero__benefit-item" key={index}>
-                    <div className="hero__benefit-icon">
-                      {item.icon}
-                    </div>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            {/* Karussell nur für mobile Geräte */}
-            {isMobile && (
-              <div className="hero__carousel">
-                <div className="hero__carousel-container">
-                  <div className="hero__carousel-controls">
-                    <button className="hero__carousel-button" onClick={prevSlide}>
-                      &#10094;
-                    </button>
-                    <button className="hero__carousel-button" onClick={nextSlide}>
-                      &#10095;
-                    </button>
-                  </div>
-                  <div 
-                    className="hero__carousel-track"
-                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                  >
-                    {benefitItems.map((item, index) => (
-                      <div className="hero__carousel-slide" key={index}>
-                        <div className="hero__benefit-item">
-                          <div className="hero__benefit-icon">
-                            {item.icon}
-                          </div>
-                          <h3>{item.title}</h3>
-                          <p>{item.description}</p>
-                        </div>
+    <div className="hero-wrapper">
+      <section className="hero" style={heroStyle}>
+        <div className="hero__container">
+          <div className={contentClass}>
+            <div className={textClass}>
+              <h1>
+                <span className="hero__title-line">Ihr Experte für <span className="hero__highlight-animated">Verkehrsrecht</span></span>
+              </h1>
+              <p className="hero__subtitle">Einfach. Digital. Recht bekommen.</p>
+              
+              {/* Normale Benefit-Items für Desktop/Tablet */}
+              {!isMobile && (
+                <div className="hero__benefits">
+                  {benefitItems.map((item, index) => (
+                    <div className="hero__benefit-item" key={index}>
+                      <div className="hero__benefit-icon">
+                        {item.icon}
                       </div>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {/* Karussell nur für mobile Geräte */}
+              {isMobile && (
+                <div className="hero__carousel">
+                  <div className="hero__carousel-container">
+                    <div className="hero__carousel-controls">
+                      <button className="hero__carousel-button" onClick={prevSlide}>
+                        &#10094;
+                      </button>
+                      <button className="hero__carousel-button" onClick={nextSlide}>
+                        &#10095;
+                      </button>
+                    </div>
+                    <div 
+                      className="hero__carousel-track"
+                      style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                    >
+                      {benefitItems.map((item, index) => (
+                        <div className="hero__carousel-slide" key={index}>
+                          <div className="hero__benefit-item">
+                            <div className="hero__benefit-icon">
+                              {item.icon}
+                            </div>
+                            <h3>{item.title}</h3>
+                            <p>{item.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="hero__carousel-indicators">
+                    {benefitItems.map((_, index) => (
+                      <div 
+                        key={index} 
+                        className={`hero__carousel-indicator ${currentSlide === index ? 'active' : ''}`}
+                        onClick={() => goToSlide(index)}
+                      />
                     ))}
                   </div>
                 </div>
-                <div className="hero__carousel-indicators">
-                  {benefitItems.map((_, index) => (
-                    <div 
-                      key={index} 
-                      className={`hero__carousel-indicator ${currentSlide === index ? 'active' : ''}`}
-                      onClick={() => goToSlide(index)}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            <button 
-              className="hero__cta-button" 
-              onClick={() => navigate('/anfrage')}
-            >
-              Jetzt kostenlos prüfen
-            </button>
+              )}
+              
+              <button 
+                className="hero__cta-button" 
+                onClick={() => navigate('/anfrage')}
+              >
+                Jetzt kostenlos prüfen
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
