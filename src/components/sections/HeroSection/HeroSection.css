@@ -141,6 +141,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
+  margin-bottom: 1rem;
 }
 
 .hero__benefit-item h3 {
@@ -204,6 +205,7 @@
     min-width: 260px;
     max-width: 380px;
     height: 100%;
+    margin-bottom: 0;
   }
 
   .hero__cta-button {
@@ -360,12 +362,14 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
+    width: 100%;
   }
 
   .hero__benefit-item {
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
     min-width: auto;
+    margin-bottom: 0.5rem;
   }
 
   .hero__benefit-item h3 {
@@ -384,6 +388,11 @@
 
   .hero__subtitle {
     font-size: 2rem;
+  }
+
+  .hero__benefit-item {
+    width: 100%;
+    max-width: 100%;
   }
 
   .hero__benefit-item h3 {
