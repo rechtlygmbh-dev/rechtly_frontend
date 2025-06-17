@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -93,6 +93,67 @@ const FeatureSection = () => {
 
   const navigate = useNavigate();
 
+  // Karussell-Zustand
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  // Prüfen, ob das Gerät mobil ist
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Karussell-Funktionen
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === features.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? features.length - 1 : prev - 1));
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  // Touch-Events für Swipe-Funktionalität
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      // Swipe nach links
+      nextSlide();
+    }
+
+    if (touchStart - touchEnd < -50) {
+      // Swipe nach rechts
+      prevSlide();
+    }
+  };
+
+  // Automatischer Wechsel der Slides alle 5 Sekunden
+  useEffect(() => {
+    if (isMobile) {
+      const interval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isMobile, currentSlide]);
+
   return (
     <section className="feature" ref={containerRef}>
       <div className="feature__container">
@@ -133,6 +194,7 @@ const FeatureSection = () => {
             />
           </motion.div>
 
+          {/* Normales Grid für Desktop/Tablet */}
           <div className="feature__cards">
             {features.map((feature, index) => (
               <motion.div
@@ -150,25 +212,82 @@ const FeatureSection = () => {
                 <div className="feature__card-arrow">→</div>
               </motion.div>
             ))}
+          </div>
 
-            <motion.div 
-              className="feature__cta"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-            >
-              <motion.button
-                className="feature__cta-button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => navigate('/anfrage/bussgeldanfrage')}
+          {/* Karussell für mobile Geräte */}
+          <div className="feature__carousel">
+            <div className="feature__carousel-container">
+              <div className="feature__carousel-controls">
+                <button 
+                  className="feature__carousel-button" 
+                  onClick={prevSlide} 
+                  aria-label="Vorherige Karte"
+                >
+                  &#10094;
+                </button>
+                <button 
+                  className="feature__carousel-button" 
+                  onClick={nextSlide} 
+                  aria-label="Nächste Karte"
+                >
+                  &#10095;
+                </button>
+              </div>
+              <div 
+                className="feature__carousel-track"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               >
-                Kostenloser Bußgeldcheck
-              </motion.button>
-            </motion.div>
+                {features.map((feature, index) => (
+                  <div className="feature__carousel-slide" key={index}>
+                    <motion.div
+                      className="feature__card"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                      onClick={() => navigate('/anfrage/bussgeldanfrage')}
+                    >
+                      <div className="feature__card-icon">{feature.icon}</div>
+                      <h3>{feature.title}</h3>
+                      <p>{feature.description}</p>
+                      <div className="feature__card-arrow">→</div>
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="feature__carousel-indicators">
+              {features.map((_, index) => (
+                <div 
+                  key={index} 
+                  className={`feature__carousel-indicator ${currentSlide === index ? 'active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Gehe zu Karte ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
+
+        <motion.div 
+          className="feature__cta"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ delay: 0.3 }}
+        >
+          <motion.button
+            className="feature__cta-button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/anfrage/bussgeldanfrage')}
+          >
+            Kostenloser Bußgeldcheck
+          </motion.button>
+        </motion.div>
       </div>
 
       <section className="prozess-section">

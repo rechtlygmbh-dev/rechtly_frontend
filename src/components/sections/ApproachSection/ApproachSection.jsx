@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -51,6 +51,66 @@ const values = [
 ];
 
 const ApproachSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  // Prüfen, ob das Gerät mobil ist
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Karussell-Funktionen
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === values.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? values.length - 1 : prev - 1));
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  // Touch-Events für Swipe-Funktionalität
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      // Swipe nach links
+      nextSlide();
+    }
+
+    if (touchStart - touchEnd < -50) {
+      // Swipe nach rechts
+      prevSlide();
+    }
+  };
+
+  // Automatischer Wechsel der Slides alle 5 Sekunden
+  useEffect(() => {
+    if (isMobile) {
+      const interval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isMobile, currentSlide]);
+
   return (
     <section className="approach">
       <div className="approach__container">
@@ -96,6 +156,7 @@ const ApproachSection = () => {
         </div>
 
         <div className="approach__content">
+          {/* Normales Grid für Desktop/Tablet */}
           <div className="approach__values">
             {values.map((value, index) => (
               <motion.div
@@ -113,6 +174,53 @@ const ApproachSection = () => {
             ))}
           </div>
 
+          {/* Karussell für mobile Geräte */}
+          <div className="approach__carousel">
+            <div className="approach__carousel-container">
+              <div className="approach__carousel-controls">
+                <button className="approach__carousel-button" onClick={prevSlide} aria-label="Vorherige Karte">
+                  &#10094;
+                </button>
+                <button className="approach__carousel-button" onClick={nextSlide} aria-label="Nächste Karte">
+                  &#10095;
+                </button>
+              </div>
+              <div 
+                className="approach__carousel-track"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {values.map((value, index) => (
+                  <div className="approach__carousel-slide" key={index}>
+                    <motion.div
+                      className="value-card"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div className="value-card__icon">{value.icon}</div>
+                      <h4>{value.title}</h4>
+                      <p>{value.description}</p>
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="approach__carousel-indicators">
+              {values.map((_, index) => (
+                <div 
+                  key={index} 
+                  className={`approach__carousel-indicator ${currentSlide === index ? 'active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Gehe zu Karte ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
           <motion.div 
             className="approach__image"
             initial={{ opacity: 0, x: 20 }}
@@ -127,12 +235,13 @@ const ApproachSection = () => {
           </motion.div>
         </div>
 
+        {/* CTA-Button außerhalb des Inhaltsbereichs für bessere mobile Sichtbarkeit */}
         <motion.div 
           className="approach__cta"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ delay: 0.3 }}
         >
           <Link to="/ueber-uns" className="approach__button">
             Mehr über uns

@@ -26,6 +26,21 @@ const testimonials = [
 const TestimonialSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Responsiveness check
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -50,8 +65,8 @@ const TestimonialSection = () => {
         <div className="testimonial__content">
           <motion.div 
             className="testimonial__left"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : -20, y: isMobile ? -20 : 0 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true }}
           >
             <span className="testimonial__label">KUNDENSTIMMEN</span>
@@ -60,8 +75,8 @@ const TestimonialSection = () => {
 
           <motion.div 
             className="testimonial__right"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : 20, y: isMobile ? 20 : 0 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true }}
           >
             <div className="testimonial__circle">
@@ -84,20 +99,20 @@ const TestimonialSection = () => {
                     </div>
                   </motion.div>
                 </AnimatePresence>
-
-                <div className="testimonial__navigation">
-                  <div className="testimonial__dots">
-                    {testimonials.map((_, idx) => (
-                      <button
-                        key={idx}
-                        className={`dot ${currentIndex === idx ? 'active' : ''}`}
-                        onClick={() => {
-                          setDirection(idx > currentIndex ? 1 : -1);
-                          setCurrentIndex(idx);
-                        }}
-                      />
-                    ))}
-                  </div>
+              </div>
+              
+              <div className="testimonial__navigation">
+                <div className="testimonial__dots">
+                  {testimonials.map((_, idx) => (
+                    <button
+                      key={idx}
+                      className={`dot ${currentIndex === idx ? 'active' : ''}`}
+                      onClick={() => {
+                        setDirection(idx > currentIndex ? 1 : -1);
+                        setCurrentIndex(idx);
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
