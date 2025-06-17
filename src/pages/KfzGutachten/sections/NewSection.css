@@ -120,19 +120,24 @@
   }
 
   .new-section__benefits {
-    flex-direction: column;
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+    width: 100%;
   }
 
   .new-section__benefits li {
     width: 100%;
     justify-content: flex-start;
-    gap: 0.8rem;
+    gap: 1rem;
+    padding: 0.5rem 0;
   }
 
   .new-section__cta-button {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    display: block;
+    text-align: center;
   }
 }
 
