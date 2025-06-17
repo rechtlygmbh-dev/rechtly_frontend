@@ -32,7 +32,7 @@ const FinalCTASection = () => {
                 <FiPhone className="contact-cta__icon" />
                 <div className="contact-cta__info">
                   <span>Telefonisch erreichen</span>
-                  <a href="tel:+4908945854589">089 / 458 545 89</a>
+                  <a href="tel:+49 170 7160000">+49 170 7160000</a>
                 </div>
               </div>
               
@@ -41,14 +41,6 @@ const FinalCTASection = () => {
                 <div className="contact-cta__info">
                   <span>Per E-Mail</span>
                   <a href="mailto:info@rechtly.de">info@rechtly.de</a>
-                </div>
-              </div>
-              
-              <div className="contact-cta__option">
-                <FiMessageCircle className="contact-cta__icon" />
-                <div className="contact-cta__info">
-                  <span>Live-Chat</span>
-                  <button className="chat-link">Chat starten</button>
                 </div>
               </div>
             </div>

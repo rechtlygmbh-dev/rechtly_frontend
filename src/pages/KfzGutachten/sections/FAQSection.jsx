@@ -65,7 +65,6 @@ const FAQSection = ({ faqs }) => {
           <FiMessageCircle className="support-icon" />
           <p>Noch Fragen? Unser Support-Team ist rund um die Uhr für Sie da!</p>
           <div className="faq-support-buttons">
-            <button className="support-cta">Jetzt Chat starten</button>
             <a href="/faq" className="support-cta secondary">Weitere Fragen</a>
           </div>
         </motion.div>
