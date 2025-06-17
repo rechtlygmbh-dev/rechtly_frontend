@@ -168,40 +168,61 @@ const Verkehrsunfall = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="faq-section">
-          <div className="section-container">
+        <section className="faq">
+          <div className="faq__container">
+            <div className="faq__header">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                Häufig gestellte Fragen
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Finden Sie schnell Antworten zu Ihrem Verkehrsunfall
+              </motion.p>
+            </div>
+
             <motion.div
-              className="section-header"
+              className="faq__list"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h2>Sie fragen, wir antworten</h2>
-            </motion.div>
-
-            <div className="faq-container">
               {faqs.map((faq, index) => (
                 <motion.div
                   key={index}
-                  className={`faq-item ${activeFaq === index ? 'active' : ''}`}
+                  className={`faq__item ${activeFaq === index ? 'active' : ''}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="faq-question" onClick={() => toggleFaq(index)}>
-                    <h3>{faq.question}</h3>
-                    <FaChevronDown className={`faq-icon ${activeFaq === index ? 'rotated' : ''}`} />
-                  </div>
-                  <AnimatePresence>
+                  <motion.button
+                    className="faq__question"
+                    onClick={() => toggleFaq(index)}
+                  >
+                    {faq.question}
+                    <span className="faq__icon">
+                      {activeFaq === index ? '−' : '+'}
+                    </span>
+                  </motion.button>
+
+                  <AnimatePresence initial={false}>
                     {activeFaq === index && (
                       <motion.div
-                        className="faq-answer"
+                        className="faq__answer"
                         initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
+                        animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
                       >
                         <p>{faq.answer}</p>
                       </motion.div>
@@ -209,25 +230,19 @@ const Verkehrsunfall = () => {
                   </AnimatePresence>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <motion.div
-              className="chat-support-box"
+              className="faq__cta"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="chat-support-content">
-                <FaComments className="chat-icon" />
-                <h3>Noch Fragen? Unser Support-Team ist rund um die Uhr für Sie da!</h3>
-                <button className="chat-button">
-                  Jetzt Chat starten
-                </button>
-                <a href="/faq" className="chat-button secondary" style={{ marginLeft: '1rem' }}>
-                  Weitere Fragen
-                </a>
-              </div>
+              <p>Noch Fragen? Wir sind für Sie da!</p>
+              <a href="/faq" className="faq__button">
+                Weitere Fragen und Kundensupport
+              </a>
             </motion.div>
           </div>
         </section>
