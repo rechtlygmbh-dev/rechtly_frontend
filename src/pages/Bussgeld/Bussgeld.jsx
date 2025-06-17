@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaClipboardCheck, FaSearch, FaBalanceScale, FaClock, 
   FaUserTie, FaFileAlt, FaCheckCircle, FaEuroSign,
   FaUpload, FaRobot, FaGavel, FaAward,
   FaCar, FaTrafficLight, FaMobileAlt, FaRulerHorizontal,
   FaWineGlass, FaParking, FaTablet, FaComments,
-  FaBell, FaLock, FaStar, FaStarHalf, FaQuoteLeft, FaArrowRight
+  FaBell, FaLock, FaStar, FaStarHalf, FaQuoteLeft, FaArrowRight,
+  FaChevronLeft, FaChevronRight
 } from 'react-icons/fa';
 import { FiSearch, FiDollarSign, FiActivity } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -18,10 +19,54 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import BussgeldHeroSection from './BussgeldHeroSection';
+import { useSwiper } from 'swiper/react';
+
+// Komponenten für Leistungen-Karussell Navigation
+function LeistungenPrevButton() {
+  const swiper = useSwiper();
+  return (
+    <button 
+      className="carousel-button prev" 
+      onClick={() => swiper.slidePrev()} 
+      aria-label="Vorherige"
+    >
+      <FaChevronLeft />
+    </button>
+  );
+}
+
+function LeistungenNextButton() {
+  const swiper = useSwiper();
+  return (
+    <button 
+      className="carousel-button next" 
+      onClick={() => swiper.slideNext()} 
+      aria-label="Nächste"
+    >
+      <FaChevronRight />
+    </button>
+  );
+}
 
 const Bussgeld = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentBussgeldSlide, setCurrentBussgeldSlide] = useState(0);
+  const [currentStepSlide, setCurrentStepSlide] = useState(0);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   const leistungen = [
@@ -78,6 +123,116 @@ const Bussgeld = () => {
     }
   ];
 
+  // Bußgeldarten für Grid und Karussell
+  const bussgeldarten = [
+    {
+      icon: <FaCar />,
+      title: "Geschwindigkeitsverstoß",
+      description: "Punkte vermeiden und Einspruch einlegen.",
+      link: "/anfrage/bussgeldanfrage"
+    },
+    {
+      icon: <FaTrafficLight />,
+      title: "Rotlichtverstoß",
+      description: "Lassen Sie Ihren Bescheid überprüfen.",
+      link: "/anfrage/bussgeldanfrage"
+    },
+    {
+      icon: <FaMobileAlt />,
+      title: "Handy am Steuer",
+      description: "Einspruch einlegen und Strafen reduzieren.",
+      link: "/anfrage/bussgeldanfrage"
+    },
+    {
+      icon: <FaRulerHorizontal />,
+      title: "Abstandsverstoß",
+      description: "Strafen bei fehlerhaften Messungen vermeiden.",
+      link: "/anfrage/bussgeldanfrage"
+    },
+    {
+      icon: <FaWineGlass />,
+      title: "Alkohol- und Drogenverstoß",
+      description: "Wir prüfen Ihren Fall.",
+      link: "/anfrage/bussgeldanfrage"
+    },
+    {
+      icon: <FaParking />,
+      title: "Parkverstöße",
+      description: "Auch kleine Strafen können rechtlich unzulässig sein.",
+      link: "/anfrage/bussgeldanfrage"
+    }
+  ];
+  
+  // Process steps für Grid und Karussell
+  const processSteps = [
+    {
+      number: "1",
+      icon: <FaUpload />,
+      title: "Fall online prüfen",
+      description: "Geben Sie Ihre Daten in wenigen Minuten ein und laden Sie Ihren Bußgeldbescheid hoch."
+    },
+    {
+      number: "2",
+      icon: <FaRobot />,
+      title: "Kostenlose Bewertung sichern",
+      description: "Erhalten Sie sofort eine persönliche Ersteinschätzung per E-Mail – einfach und unverbindlich."
+    },
+    {
+      number: "3",
+      icon: <FaGavel />,
+      title: "Bußgeld verhindern",
+      description: "Beauftragen Sie unsere Experten, die direkt Einspruch einlegen und für Ihre Rechte kämpfen."
+    }
+  ];
+
+  // Karussell-Navigation für Bussgeldarten
+  const nextBussgeldSlide = () => {
+    setCurrentBussgeldSlide((prev) => (prev === bussgeldarten.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevBussgeldSlide = () => {
+    setCurrentBussgeldSlide((prev) => (prev === 0 ? bussgeldarten.length - 1 : prev - 1));
+  };
+
+  const goToBussgeldSlide = (index) => {
+    setCurrentBussgeldSlide(index);
+  };
+
+  // Karussell-Navigation für Process Steps
+  const nextStepSlide = () => {
+    setCurrentStepSlide((prev) => (prev === processSteps.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevStepSlide = () => {
+    setCurrentStepSlide((prev) => (prev === 0 ? processSteps.length - 1 : prev - 1));
+  };
+
+  const goToStepSlide = (index) => {
+    setCurrentStepSlide(index);
+  };
+
+  // Automatischer Wechsel alle 5 Sekunden für Bussgeldarten
+  useEffect(() => {
+    if (isMobile) {
+      const interval = setInterval(() => {
+        nextBussgeldSlide();
+      }, 5000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isMobile, currentBussgeldSlide]);
+  
+  // Automatischer Wechsel alle 5 Sekunden für Process Steps
+  useEffect(() => {
+    if (isMobile) {
+      const interval = setInterval(() => {
+        nextStepSlide();
+      }, 5000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isMobile, currentStepSlide]);
+
   return (
     <div className="bussgeld-page">
       <BussgeldHeroSection />
@@ -94,109 +249,81 @@ const Bussgeld = () => {
             <h2>Welche Bußgeldarten prüfen wir?</h2>
           </motion.div>
 
-          <div className="bussgeldarten-grid">
-            <motion.div
-              className="bussgeldart-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="bussgeldart-icon">
-                <FaCar />
-              </div>
-              <h3>Geschwindigkeitsverstoß</h3>
-              <p>Punkte vermeiden und Einspruch einlegen.</p>
-              <Link to="/anfrage/bussgeldanfrage" className="bussgeldart-button">
-                Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
-              </Link>
-            </motion.div>
+          {/* Desktop-Version: Grid */}
+          {!isMobile && (
+            <div className="bussgeldarten-grid">
+              {bussgeldarten.map((art, index) => (
+                <motion.div
+                  key={index}
+                  className="bussgeldart-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                >
+                  <div className="bussgeldart-icon">
+                    {art.icon}
+                  </div>
+                  <h3>{art.title}</h3>
+                  <p>{art.description}</p>
+                  <Link to={art.link} className="bussgeldart-button">
+                    Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
-            <motion.div
-              className="bussgeldart-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="bussgeldart-icon">
-                <FaTrafficLight />
+          {/* Mobile-Version: Karussell */}
+          {isMobile && (
+            <div className="bussgeldarten-carousel">
+              <div className="carousel-container">
+                <div className="carousel-controls">
+                  <button className="carousel-button prev" onClick={prevBussgeldSlide} aria-label="Vorherige">
+                    <FaChevronLeft />
+                  </button>
+                  <button className="carousel-button next" onClick={nextBussgeldSlide} aria-label="Nächste">
+                    <FaChevronRight />
+                  </button>
+                </div>
+                <div 
+                  className="carousel-track"
+                  style={{ transform: `translateX(-${currentBussgeldSlide * 100}%)` }}
+                >
+                  {bussgeldarten.map((art, index) => (
+                    <div className="carousel-slide" key={index}>
+                      <motion.div
+                        className="bussgeldart-card"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <div className="bussgeldart-icon">
+                          {art.icon}
+                        </div>
+                        <h3>{art.title}</h3>
+                        <p>{art.description}</p>
+                        <Link to={art.link} className="bussgeldart-button">
+                          Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
+                        </Link>
+                      </motion.div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3>Rotlichtverstoß</h3>
-              <p>Lassen Sie Ihren Bescheid überprüfen.</p>
-              <Link to="/anfrage/bussgeldanfrage" className="bussgeldart-button">
-                Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              className="bussgeldart-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="bussgeldart-icon">
-                <FaMobileAlt />
+              <div className="carousel-indicators">
+                {bussgeldarten.map((_, index) => (
+                  <button 
+                    key={index} 
+                    className={`carousel-indicator ${currentBussgeldSlide === index ? 'active' : ''}`}
+                    onClick={() => goToBussgeldSlide(index)}
+                    aria-label={`Gehe zu Slide ${index + 1}`}
+                  />
+                ))}
               </div>
-              <h3>Handy am Steuer</h3>
-              <p>Einspruch einlegen und Strafen reduzieren.</p>
-              <Link to="/anfrage/bussgeldanfrage" className="bussgeldart-button">
-                Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              className="bussgeldart-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="bussgeldart-icon">
-                <FaRulerHorizontal />
-              </div>
-              <h3>Abstandsverstoß</h3>
-              <p>Strafen bei fehlerhaften Messungen vermeiden.</p>
-              <Link to="/anfrage/bussgeldanfrage" className="bussgeldart-button">
-                Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              className="bussgeldart-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <div className="bussgeldart-icon">
-                <FaWineGlass />
-              </div>
-              <h3>Alkohol- und Drogenverstoß</h3>
-              <p>Wir prüfen Ihren Fall.</p>
-              <Link to="/anfrage/bussgeldanfrage" className="bussgeldart-button">
-                Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              className="bussgeldart-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <div className="bussgeldart-icon">
-                <FaParking />
-              </div>
-              <h3>Parkverstöße</h3>
-              <p>Auch kleine Strafen können rechtlich unzulässig sein.</p>
-              <Link to="/anfrage/bussgeldanfrage" className="bussgeldart-button">
-                Jetzt prüfen lassen <FaArrowRight className="arrow-icon" />
-              </Link>
-            </motion.div>
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -213,52 +340,77 @@ const Bussgeld = () => {
             <h2>So einfach geht's – In nur 3 Schritten zu Ihrem Recht</h2>
           </motion.div>
 
-          <div className="process-steps-grid">
-            <motion.div
-              className="step-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="step-number">1</div>
-              <div className="step-icon">
-                <FaUpload />
-              </div>
-              <h3>Fall online prüfen</h3>
-              <p>Geben Sie Ihre Daten in wenigen Minuten ein und laden Sie Ihren Bußgeldbescheid hoch.</p>
-            </motion.div>
+          {/* Desktop-Version: Grid */}
+          {!isMobile && (
+            <div className="process-steps-grid">
+              {processSteps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  className="step-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                >
+                  <div className="step-number">{step.number}</div>
+                  <div className="step-icon">
+                    {step.icon}
+                  </div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
-            <motion.div
-              className="step-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="step-number">2</div>
-              <div className="step-icon">
-                <FaRobot />
+          {/* Mobile-Version: Karussell */}
+          {isMobile && (
+            <div className="steps-carousel">
+              <div className="carousel-container">
+                <div className="carousel-controls">
+                  <button className="carousel-button prev" onClick={prevStepSlide} aria-label="Vorherige">
+                    <FaChevronLeft />
+                  </button>
+                  <button className="carousel-button next" onClick={nextStepSlide} aria-label="Nächste">
+                    <FaChevronRight />
+                  </button>
+                </div>
+                <div 
+                  className="carousel-track"
+                  style={{ transform: `translateX(-${currentStepSlide * 100}%)` }}
+                >
+                  {processSteps.map((step, index) => (
+                    <div className="carousel-slide" key={index}>
+                      <motion.div
+                        className="step-card"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <div className="step-number">{step.number}</div>
+                        <div className="step-icon">
+                          {step.icon}
+                        </div>
+                        <h3>{step.title}</h3>
+                        <p>{step.description}</p>
+                      </motion.div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3>Kostenlose Bewertung sichern</h3>
-              <p>Erhalten Sie sofort eine persönliche Ersteinschätzung per E-Mail – einfach und unverbindlich.</p>
-            </motion.div>
-
-            <motion.div
-              className="step-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="step-number">3</div>
-              <div className="step-icon">
-                <FaGavel />
+              <div className="carousel-indicators">
+                {processSteps.map((_, index) => (
+                  <button 
+                    key={index} 
+                    className={`carousel-indicator ${currentStepSlide === index ? 'active' : ''}`}
+                    onClick={() => goToStepSlide(index)}
+                    aria-label={`Gehe zu Schritt ${index + 1}`}
+                  />
+                ))}
               </div>
-              <h3>Bußgeld verhindern</h3>
-              <p>Beauftragen Sie unsere Experten, die direkt Einspruch einlegen und für Ihre Rechte kämpfen.</p>
-            </motion.div>
-          </div>
+            </div>
+          )}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -332,32 +484,74 @@ const Bussgeld = () => {
             <h2>Warum Rechtly?</h2>
           </motion.div>
 
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            spaceBetween={30}
-            slidesPerView={3}
-            pagination={{ clickable: true }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true
-            }}
-            breakpoints={{
-              768: { slidesPerView: 1 },
-              1024: { slidesPerView: 2 },
-              1400: { slidesPerView: 3 },
-            }}
-          >
-            {leistungen.map((leistung, index) => (
-              <SwiperSlide key={index}>
-                <div className="leistung-card">
-                  <div className="leistung-icon">{leistung.icon}</div>
-                  <h3>{leistung.title}</h3>
-                  <p>{leistung.description}</p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {/* Desktop-Version: Slider mit mehreren Karten */}
+          {!isMobile && (
+            <Swiper
+              modules={[Pagination, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={3}
+              pagination={{ clickable: true }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+              }}
+              breakpoints={{
+                1024: { slidesPerView: 2 },
+                1400: { slidesPerView: 3 },
+              }}
+            >
+              {leistungen.map((leistung, index) => (
+                <SwiperSlide key={index}>
+                  <div className="leistung-card">
+                    <div className="leistung-icon">{leistung.icon}</div>
+                    <h3>{leistung.title}</h3>
+                    <p>{leistung.description}</p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+
+          {/* Mobile-Version: Karussell wie bei anderen Sektionen */}
+          {isMobile && (
+            <div className="leistungen-carousel">
+              <div className="carousel-container">
+                <Swiper
+                  modules={[Navigation, Pagination, Autoplay]}
+                  spaceBetween={10}
+                  slidesPerView={1}
+                  pagination={{ 
+                    clickable: true,
+                    el: '.leistungen-carousel .swiper-pagination'
+                  }}
+                  navigation={false}
+                  autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: false
+                  }}
+                  loop={true}
+                  className="leistung-swiper"
+                >
+                  <div className="carousel-controls">
+                    <LeistungenPrevButton />
+                    <LeistungenNextButton />
+                  </div>
+                  
+                  {leistungen.map((leistung, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="leistung-card mobile">
+                        <div className="leistung-icon">{leistung.icon}</div>
+                        <h3>{leistung.title}</h3>
+                        <p>{leistung.description}</p>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+              <div className="swiper-pagination leistungen-pagination"></div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -396,9 +590,6 @@ const Bussgeld = () => {
           </motion.div>
         </div>
       </section>
-
-
-      
 
       {/* Final CTA Section */}
       <section className="final-cta-section">
